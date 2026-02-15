@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender Jugando - Educación Infantil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fef5e7 0%, #ffeaa7 50%, #fdcb6e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #ffd700;
+            object-fit: cover;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .header-text {
+            flex: 1;
+            color: white;
+        }
+
+        .header-text h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 1s ease-out;
+        }
+
+        .header-text p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-align: justify;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: slideInRight 1.2s ease-out;
+        }
+
+        .follow-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 50px 40px;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .follow-section h2 {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .follow-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .follow-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .follow-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .follow-form button {
+            background: #ffd700;
+            color: #667eea;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .follow-form button:hover {
+            background: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .follow-message {
+            color: #ffd700;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #e74c3c, #3498db);
+            border-radius: 2px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Entradas Grid */
+        .entradas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .entrada-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .entrada-card:nth-child(1) { animation-delay: 0.1s; }
+        .entrada-card:nth-child(2) { animation-delay: 0.2s; }
+        .entrada-card:nth-child(3) { animation-delay: 0.3s; }
+        .entrada-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .entrada-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .entrada-card.red {
+            border-top: 5px solid #e74c3c;
+        }
+
+        .entrada-card.yellow {
+            border-top: 5px solid #f1c40f;
+        }
+
+        .entrada-card.blue {
+            border-top: 5px solid #3498db;
+        }
+
+        .entrada-card.red-alt {
+            border-top: 5px solid #c0392b;
+        }
+
+        .entrada-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .entrada-card:hover .entrada-img {
+            transform: scale(1.05);
+        }
+
+        .entrada-title {
+            padding: 20px;
+            font-size: 1.4em;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Ventana flotante */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 25px;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            animation: popupSlide 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes popupSlide {
+            from {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-close:hover {
+            background: #c0392b;
+            transform: rotate(90deg);
+        }
+
+        .popup-content h3 {
+            color: #e74c3c;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .popup-content .content-text {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #34495e;
+            margin-bottom: 30px;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 3px solid #3498db;
+        }
+
+        .comments-section h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .comment-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .comment-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
+        .comment-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #f1c40f;
+            animation: slideInLeft 0.5s ease;
+        }
+
+        /* Respuesta de IA */
+        .comment-item.ai-response {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid #2196f3;
+            margin-left: 30px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .comment-item.ai-response::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: -50px;
+            width: 40px;
+            height: 40px;
+            background-image: url('data:image/png;base64,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');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #2196f3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: #2196f3;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .loading-ai {
+            display: inline-block;
+            color: #2196f3;
+            font-style: italic;
+            margin-left: 30px;
+            margin-top: 10px;
+            padding: 15px 20px;
+            background: #e3f2fd;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .loading-ai::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .comment-item strong {
+            color: #e74c3c;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .comment-text {
+            color: #34495e;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .comment-date {
+            color: #95a5a6;
+            font-size: 0.85em;
+            font-style: italic;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .username-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .username-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Sección Foro */
+        .foro-section {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            padding: 40px;
+            border-radius: 25px;
+            margin: 50px 0;
+            color: white;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .foro-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .foro-section .content-text {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.2em;
+            margin-bottom: 25px;
+        }
+
+        .foro-section textarea {
+            width: 100%;
+            padding: 20px;
+            border-radius: 15px;
+            border: none;
+            font-size: 1em;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+
+        .foro-section button {
+            background: #f1c40f;
+            color: #2c3e50;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.4);
+        }
+
+        .foro-section button:hover {
+            background: #f39c12;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(241, 196, 15, 0.5);
+        }
+
+        /* Reflexión Final */
+        .reflexion-section {
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            padding: 40px;
+            border-radius: 25px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(241, 196, 15, 0.3);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .reflexion-section h2 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .reflexion-section .content-text {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-link.facebook {
+            background: #1877f2;
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .social-link.twitter {
+            background: #1da1f2;
+        }
+
+        .social-link.youtube {
+            background: #ff0000;
+        }
+
+        .social-link.tiktok {
+            background: #000000;
+        }
+
+        .social-link.whatsapp {
+            background: #25d366;
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #e74c3c, #3498db);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #c0392b, #2980b9);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .popup-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="data:image/png;base64,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" alt="Perfil Aprender Jugando" class="profile-img">
+            <div class="header-text">
+                <h1>🎨 Aprender Jugando en Educación Infantil</h1>
+                <p>Este blog trata sobre la educación infantil y diferentes formas de enseñar a los niños pequeños de manera divertida y creativa, aquí se compartirán ideas, actividades y reflexiones para mejorar el aprendizaje usando juegos, lectura y tecnología.</p>
+            </div>
+        </header>
+
+        <main>
+            <h2 class="section-title">📚 Entradas Educativas</h2>
+            
+            <div class="entradas-grid">
+                <!-- Entrada 1 -->
+                <div class="entrada-card red" onclick="openPopup('popup1')">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop" alt="Niños jugando" class="entrada-img">
+                    <div class="entrada-title">🎮 El juego como forma de aprendizaje</div>
+                </div>
+
+                <!-- Entrada 2 -->
+                <div class="entrada-card yellow" onclick="openPopup('popup2')">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop" alt="Cuentos infantiles" class="entrada-img">
+                    <div class="entrada-title">📖 Cómo ayudar a los niños a desarrollar el lenguaje</div>
+                </div>
+
+                <!-- Entrada 3 -->
+                <div class="entrada-card blue" onclick="openPopup('popup3')">
+                    <img src="https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?w=600&h=400&fit=crop" alt="Niños coloreando" class="entrada-img">
+                    <div class="entrada-title">✋ Actividades para la motricidad fina</div>
+                </div>
+
+                <!-- Entrada 4 -->
+                <div class="entrada-card red-alt" onclick="openPopup('popup4')">
+                    <img src="https://images.unsplash.com/photo-1596496050755-c923e73e42e1?w=600&h=400&fit=crop" alt="Niños con tablet" class="entrada-img">
+                    <div class="entrada-title">💻 La tecnología en la educación infantil</div>
+                </div>
+            </div>
+
+            <!-- Sección Foro -->
+            <div class="foro-section">
+                <h2>💭 ¿La tecnología ayuda o distrae a los niños?</h2>
+                <div class="content-text">
+                    Hoy en día los niños usan celulares, tabletas y computadoras desde muy pequeños, en la escuela la tecnología puede ayudar a aprender de forma más divertida, pero también puede distraer si no se usa bien. ¿Qué piensas tú? ¿Crees que la tecnología ayuda o perjudica el aprendizaje de los niños? Deja tu opinión en los comentarios.
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 15px; margin: 20px 0;">
+                    <p style="margin: 0; font-size: 1.1em;">📧 <strong>Nota:</strong> Se enviará una invitación por correo electrónico a todos los compañeros para participar en este debate educativo.</p>
+                </div>
+                <input type="text" class="username-input" placeholder="Tu nombre" id="foroNombre">
+                <textarea placeholder="Escribe tu opinión aquí..." id="foroInput"></textarea>
+                <button onclick="agregarOpinionForo()">Publicar Opinión</button>
+                <div class="comments-list" id="foroComments"></div>
+            </div>
+
+            <!-- Reflexión Final -->
+            <div class="reflexion-section">
+                <h2>🌟 Reflexión sobre las TIC en Educación</h2>
+                <div class="content-text">
+                    Las TIC son muy importantes en la educación actual, porque ayudan a que las clases sean más dinámicas y divertidas, los estudiantes pueden aprender con videos, juegos educativos y plataformas digitales, lo que hace que el aprendizaje sea más interesante. Un blog educativo también es una buena herramienta, porque permite compartir información, actividades y opiniones en un solo lugar, además facilita la comunicación entre el docente y los estudiantes, ya que se pueden hacer comentarios y debates. Como futuro docente, pienso que es importante usar la tecnología de forma correcta, para motivar a los niños y ayudarlos a aprender mejor, porque vivimos en una época donde la tecnología forma parte de la vida diaria.
+                </div>
+                <div style="text-align: right; margin-top: 20px; color: #2c3e50; font-style: italic;">
+                    <p><strong>Autor:</strong> Blog Aprender Jugando | <strong>Fecha:</strong> 15 de febrero de 2026</p>
+                </div>
+            </div>
+
+            <!-- Sección de Seguir -->
+            <div class="follow-section">
+                <h2>📬 ¡Suscríbete al Blog!</h2>
+                <p>Recibe las últimas actualizaciones, actividades y consejos educativos directamente en tu correo</p>
+                <div class="follow-form">
+                    <input type="email" id="emailInput" placeholder="Ingresa tu correo electrónico" required>
+                    <button onclick="subscribeBlog()">Suscribirse</button>
+                </div>
+                <p class="follow-message" id="followMessage">✓ ¡Gracias por suscribirte!</p>
+            </div>
+        </main>
+
+        <footer>
+            <div class="social-media">
+                <a href="#" class="social-link facebook" title="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link instagram" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link twitter" title="Twitter/X">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link youtube" title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link tiktok" title="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link whatsapp" title="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer-text">✨ Aprender Jugando - 2026 | Educación con amor y creatividad 💙💛❤️</p>
+        </footer>
+    </div>
+
+    <!-- Popups para cada entrada -->
+    <!-- Popup 1 -->
+    <div class="popup-overlay" id="popup1">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup('popup1')">×</button>
+            <h3>🎮 El juego como forma de aprendizaje</h3>
+            <div class="content-text">
+                El juego es una de las formas más importantes en las que los niños pequeños aprenden, porque mientras juegan se sienten libres, felices y con ganas de explorar todo lo que hay a su alrededor, cuando un niño juega no solo se divierte, también desarrolla su imaginación, aprende a compartir, a respetar turnos y a resolver pequeños problemas por sí mismo, además el juego ayuda a fortalecer la comunicación, la creatividad y la confianza en sí mismos, también les permite expresar sus emociones y entender mejor a los demás, por eso en la educación infantil el juego no es una pérdida de tiempo, sino una herramienta educativa muy valiosa que permite que los niños aprendan de forma natural, activa y sin presión.
+            </div>
+            <div style="text-align: right; margin-top: 20px; color: #7f8c8d; font-style: italic;">
+                <p><strong>Autor:</strong> Blog Aprender Jugando | <strong>Fecha:</strong> 10 de febrero de 2026</p>
+            </div>
+            <div class="comments-section">
+                <h4>💬 Comentarios</h4>
+                <input type="text" class="username-input" placeholder="Tu nombre" id="nombre1">
+                <input type="text" class="comment-input" placeholder="Escribe tu comentario..." id="comment1">
+                <button class="comment-button" onclick="agregarComentario('nombre1', 'comment1', 'comments1', 'popup1')">Comentar</button>
+                <div class="comments-list" id="comments1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup 2 -->
+    <div class="popup-overlay" id="popup2">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup('popup2')">×</button>
+
+            <h3>📖 Cómo ayudar a los niños a desarrollar el lenguaje</h3>
+            <div class="content-text">
+                El desarrollo del lenguaje es fundamental en los primeros años de vida, porque gracias a él los niños pueden expresar lo que sienten, lo que piensan y lo que necesitan, además les ayuda a comunicarse mejor con los demás y a comprender lo que ocurre a su alrededor, los docentes y las familias pueden ayudar leyendo cuentos, cantando canciones, conversando con ellos todos los días y haciéndoles preguntas sencillas, estas actividades hacen que los niños aprendan nuevas palabras, mejoren su pronunciación y pierdan el miedo a hablar frente a otros, también es importante escuchar a los niños con atención y darles tiempo para expresarse, porque así se sienten valorados y seguros, cuando el lenguaje se estimula desde pequeños, los niños tienen más facilidad para aprender a leer, escribir y participar en clase.
+            </div>
+            <div style="text-align: right; margin-top: 20px; color: #7f8c8d; font-style: italic;">
+                <p><strong>Autor:</strong> Blog Aprender Jugando | <strong>Fecha:</strong> 11 de febrero de 2026</p>
+            </div>
+            <div class="comments-section">
+                <h4>💬 Comentarios</h4>
+                <input type="text" class="username-input" placeholder="Tu nombre" id="nombre2">
+                <input type="text" class="comment-input" placeholder="Escribe tu comentario..." id="comment2">
+                <button class="comment-button" onclick="agregarComentario('nombre2', 'comment2', 'comments2', 'popup2')">Comentar</button>
+                <div class="comments-list" id="comments2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup 3 -->
+    <div class="popup-overlay" id="popup3">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup('popup3')">×</button>
+            <h3>✋ Actividades para la motricidad fina</h3>
+            <div class="content-text">
+                La motricidad fina es la habilidad de usar los músculos pequeños de las manos y los dedos para hacer movimientos precisos y coordinados, como escribir, recortar, abrochar botones, dibujar o agarrar objetos pequeños, en la educación infantil es muy importante trabajar la motricidad fina desde temprana edad, porque esto ayuda a que los niños puedan realizar tareas diarias por sí mismos, como comer con cuchara, vestirse o atarse los zapatos, algunas actividades que se pueden hacer para mejorar esta habilidad son: moldear plastilina, rasgar papel con los dedos, enhebrar cuentas en un hilo, colorear sin salirse de las líneas, recortar con tijeras especiales para niños, armar rompecabezas, pegar stickers, usar pinzas para tomar objetos pequeños y jugar con bloques de construcción, todas estas actividades son divertidas y al mismo tiempo ayudan a fortalecer los músculos de las manos y a mejorar la coordinación ojo-mano, lo cual es fundamental para que luego los niños aprendan a escribir correctamente.
+            </div>
+            <div style="text-align: right; margin-top: 20px; color: #7f8c8d; font-style: italic;">
+                <p><strong>Autor:</strong> Blog Aprender Jugando | <strong>Fecha:</strong> 12 de febrero de 2026</p>
+            </div>
+            <div class="comments-section">
+                <h4>💬 Comentarios</h4>
+                <input type="text" class="username-input" placeholder="Tu nombre" id="nombre3">
+                <input type="text" class="comment-input" placeholder="Escribe tu comentario..." id="comment3">
+                <button class="comment-button" onclick="agregarComentario('nombre3', 'comment3', 'comments3', 'popup3')">Comentar</button>
+                <div class="comments-list" id="comments3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup 4 -->
+    <div class="popup-overlay" id="popup4">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup('popup4')">×</button>
+            <h3>💻 La tecnología en la educación infantil</h3>
+            <div class="content-text">
+                La tecnología forma parte de la vida diaria de los niños, por eso también puede utilizarse como una herramienta educativa dentro del aula, las tabletas, los juegos interactivos, las aplicaciones educativas y los videos didácticos pueden hacer que el aprendizaje sea más divertido, visual y dinámico, lo que aumenta la motivación de los estudiantes y su interés por participar, sin embargo, es importante que el uso de la tecnología sea controlado y tenga objetivos educativos claros, para que no se convierta en una distracción o en un uso excesivo, los docentes deben seleccionar contenidos adecuados para la edad y combinar la tecnología con actividades físicas, juegos y trabajo en grupo, cuando se usa correctamente, la tecnología puede ayudar a reforzar contenidos, estimular la curiosidad, desarrollar habilidades digitales y apoyar el aprendizaje de una manera más moderna y atractiva.
+            </div>
+            <div style="text-align: right; margin-top: 20px; color: #7f8c8d; font-style: italic;">
+                <p><strong>Autor:</strong> Blog Aprender Jugando | <strong>Fecha:</strong> 13 de febrero de 2026</p>
+            </div>
+            <div class="comments-section">
+                <h4>💬 Comentarios</h4>
+                <input type="text" class="username-input" placeholder="Tu nombre" id="nombre4">
+                <input type="text" class="comment-input" placeholder="Escribe tu comentario..." id="comment4">
+                <button class="comment-button" onclick="agregarComentario('nombre4', 'comment4', 'comments4', 'popup4')">Comentar</button>
+                <div class="comments-list" id="comments4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Comentarios con IA - VERSION DEMO (LocalStorage) -->
+    <script>
+        // ===========================================
+        // VERSIÓN DE DEMOSTRACIÓN MEJORADA
+        // La IA responde directamente debajo de cada comentario
+        // ===========================================
+
+        const contextoPorSeccion = {
+            popup1: "juego y aprendizaje",
+            popup2: "desarrollo del lenguaje",
+            popup3: "motricidad fina",
+            popup4: "tecnología educativa",
+            foro: "tecnología en educación"
+        };
+
+        // Simulación de respuestas de IA educativas mejoradas
+        function generarRespuestaInteligente(comentarioTexto, seccion) {
+            const texto = comentarioTexto.toLowerCase();
+            
+            // Detectar si es una pregunta
+            const esPregunta = texto.includes('?') || 
+                             texto.includes('cómo') || texto.includes('como') ||
+                             texto.includes('qué') || texto.includes('que') ||
+                             texto.includes('cuál') || texto.includes('cual') ||
+                             texto.includes('dónde') || texto.includes('donde') ||
+                             texto.includes('cuándo') || texto.includes('cuando') ||
+                             texto.includes('por qué') || texto.includes('porque');
+            
+            // Detectar preguntas sobre corrección/validación
+            if ((texto.includes('correcto') || texto.includes('bien') || texto.includes('adecuado')) && esPregunta) {
+                if (texto.includes('psicolog') || texto.includes('desarrollo') || texto.includes('edad')) {
+                    return "Sí, es completamente correcto desde el punto de vista psicológico. El desarrollo infantil se beneficia enormemente de estas prácticas porque respetan el ritmo natural de aprendizaje de cada niño. La evidencia científica respalda ampliamente este enfoque en educación temprana.";
+                }
+                return "Sí, ese enfoque es muy adecuado. Está respaldado por la pedagogía moderna y se alinea con las mejores prácticas en educación infantil. Es importante mantener la consistencia y observar cómo responde cada niño.";
+            }
+            
+            // Detectar preguntas sobre edad específica
+            if (esPregunta && (texto.match(/\d+\s*año/) || texto.includes('años'))) {
+                const edadMatch = texto.match(/(\d+)\s*año/);
+                if (edadMatch) {
+                    const edad = parseInt(edadMatch[1]);
+                    if (edad <= 3) {
+                        return `Para niños de ${edad} años, es fundamental enfocarse en actividades sensoriales y motoras gruesas. Los juegos de apilamiento, encaje simple y exploración táctil son ideales. A esta edad, el juego paralelo es normal y cada actividad debe durar 5-10 minutos máximo.`;
+                    } else if (edad <= 5) {
+                        return `A los ${edad} años, los niños están listos para juegos más estructurados. Los rompecabezas de 10-20 piezas, juegos de clasificación por color y forma, y actividades de construcción son perfectos. También pueden participar en juegos cooperativos simples y seguir reglas básicas.`;
+                    } else {
+                        return `Para ${edad} años, pueden manejar juegos de reglas más complejas, actividades que requieren estrategia básica y proyectos que desarrollen la creatividad. Los juegos de mesa educativos, construcción avanzada y actividades artísticas detalladas son muy apropiados.`;
+                    }
+                }
+            }
+            
+            // Detectar preguntas sobre "mejores" o recomendaciones
+            if (esPregunta && (texto.includes('mejor') || texto.includes('recomend') || texto.includes('suger'))) {
+                if (texto.includes('juego') || texto.includes('actividad')) {
+                    return "Los mejores juegos son aquellos que combinan diversión con objetivos de aprendizaje claros. Te recomiendo: juegos de construcción (desarrollan pensamiento espacial), rompecabezas (mejoran concentración), juegos simbólicos como la casita o doctor (fomentan creatividad), y juegos al aire libre (desarrollan motricidad gruesa).";
+                }
+                if (texto.includes('libro') || texto.includes('cuento') || texto.includes('leer')) {
+                    return "Los mejores libros para esta edad son aquellos con: ilustraciones grandes y coloridas, texto simple y repetitivo, temáticas cercanas a su vida diaria, y que inviten a la interacción (tocar, señalar, hacer sonidos). La lectura debe ser un momento placentero, no una obligación.";
+                }
+            }
+            
+            // Detectar preguntas sobre problemas o dificultades
+            if (esPregunta && (texto.includes('problema') || texto.includes('dificultad') || texto.includes('no puede') || texto.includes('le cuesta'))) {
+                return "Cada niño se desarrolla a su propio ritmo y es normal que algunos aspectos tomen más tiempo. Te sugiero: observar sin presionar, ofrecer apoyo sin hacer por ellos, celebrar pequeños avances, y si la dificultad persiste más de 3 meses o te preocupa, consultar con un especialista en desarrollo infantil.";
+            }
+            
+            // Detectar preguntas sobre cantidad/frecuencia
+            if (esPregunta && (texto.includes('cuánto') || texto.includes('cuanto') || texto.includes('veces') || texto.includes('tiempo'))) {
+                if (texto.includes('leer') || texto.includes('lectura')) {
+                    return "Lo ideal es leer al menos 15-20 minutos diarios. Puede ser en varios momentos cortos: por la mañana, antes de la siesta, o antes de dormir. Lo importante es la constancia y que sea un momento agradable, no la cantidad exacta de tiempo.";
+                }
+                if (texto.includes('jugar') || texto.includes('juego')) {
+                    return "Los niños en edad preescolar necesitan al menos 2-3 horas diarias de juego activo. Esto incluye: juego libre (60%), juego estructurado (30%), y actividades tranquilas (10%). El juego es su forma natural de aprender, no es tiempo perdido.";
+                }
+                if (texto.includes('pantalla') || texto.includes('tablet') || texto.includes('tv') || texto.includes('tecnología')) {
+                    return "Para menores de 2 años: evitar pantallas salvo videollamadas. De 2-5 años: máximo 1 hora diaria de contenido de calidad, siempre con acompañamiento adulto. La clave es que la tecnología complemente, no reemplace, el juego físico y la interacción humana.";
+                }
+            }
+            
+            // Detectar preguntas sobre lenguaje/habla
+            if (texto.includes('hablar') || texto.includes('lenguaje') || texto.includes('palabra')) {
+                if (esPregunta) {
+                    return "Para estimular el lenguaje: habla constantemente con el niño describiendo lo que haces, lee cuentos diariamente, canta canciones infantiles, hazle preguntas abiertas, y escúchalo con atención sin corregir cada error. Dale tiempo para expresarse sin apurarlo. El lenguaje se desarrolla mejor en conversaciones reales, no con pantallas.";
+                }
+                return "El desarrollo del lenguaje es progresivo y varía mucho entre niños. Lo importante es que haya avances constantes. Si hay preocupación por retraso del habla, es mejor consultar temprano con un especialista en lenguaje infantil.";
+            }
+            
+            // Detectar preguntas sobre comportamiento
+            if (texto.includes('comporta') || texto.includes('portarse') || texto.includes('rabieta') || texto.includes('berrinche')) {
+                return "Los comportamientos desafiantes son normales en esta etapa. Estrategias efectivas: mantén rutinas consistentes, da opciones limitadas, valida sus emociones sin ceder a demandas, usa consecuencias lógicas en lugar de castigos, y sobre todo mantén la calma. Los berrinches suelen disminuir cuando el lenguaje mejora.";
+            }
+            
+            // Respuestas por tema/contexto de la sección
+            const contexto = contextoPorSeccion[seccion] || '';
+            
+            if (contexto.includes('juego')) {
+                return "El juego es la forma más natural y efectiva de aprendizaje en la infancia. A través del juego, los niños desarrollan habilidades cognitivas, sociales y emocionales sin presión académica. Es importante ofrecer variedad: juego libre, juego guiado y momentos de juego en solitario y en grupo.";
+            }
+            
+            if (contexto.includes('lenguaje')) {
+                return "El desarrollo del lenguaje requiere interacción constante y de calidad. Más importante que la cantidad de palabras es la riqueza de las conversaciones. Pregunta, escucha, amplía sus respuestas y lee diariamente. Cada niño tiene su propio ritmo de desarrollo lingüístico.";
+            }
+            
+            if (contexto.includes('motricidad')) {
+                return "La motricidad fina se desarrolla con práctica constante y actividades variadas. Es importante no forzar, sino ofrecer oportunidades de práctica de forma lúdica: plastilina, recortar, enhebrar, dibujar. Estas habilidades son base fundamental para la escritura futura.";
+            }
+            
+            if (contexto.includes('tecnolog')) {
+                return "La tecnología debe ser una herramienta complementaria, nunca el centro de la educación infantil. Selecciona contenido de calidad, establece límites claros de tiempo, y siempre acompaña el uso tecnológico. El aprendizaje más valioso en esta edad viene de la interacción humana y la exploración física del mundo.";
+            }
+            
+            // Respuesta general cuando no se detecta un patrón específico
+            return "Gracias por compartir tu perspectiva. En educación infantil, cada niño es único y se desarrolla a su propio ritmo. Lo más importante es crear un ambiente rico en estímulos, seguro emocionalmente y respetuoso del desarrollo individual. Si tienes dudas específicas sobre el desarrollo de un niño, siempre es recomendable consultar con un profesional.";
+        }
+
+        function obtenerComentarios(seccion) {
+            return JSON.parse(localStorage.getItem('comentarios_' + seccion) || '[]');
+        }
+
+        function guardarComentarios(seccion, comentarios) {
+            localStorage.setItem('comentarios_' + seccion, JSON.stringify(comentarios));
+        }
+
+        function formatearFecha(fechaISO) {
+            const fecha = new Date(fechaISO);
+            return fecha.toLocaleDateString('es-ES', { 
+                year: 'numeric', month: 'long', day: 'numeric', 
+                hour: '2-digit', minute: '2-digit' 
+            });
+        }
+
+        function crearElementoComentario(comentario, esIA = false, conRespuesta = null) {
+            const div = document.createElement('div');
+            div.style.marginBottom = '20px';
+            
+            // Comentario principal
+            const comentarioDiv = document.createElement('div');
+            comentarioDiv.className = esIA ? 'comment-item ai-response' : 'comment-item';
+            
+            const nombreDisplay = esIA ? 
+                `<strong>Autor del Blog<span class="ai-badge">RESPUESTA</span></strong>` :
+                `<strong>${comentario.nombre}</strong>`;
+            
+            comentarioDiv.innerHTML = `
+                ${nombreDisplay}
+                <div class="comment-text">${comentario.texto}</div>
+                <span class="comment-date">${formatearFecha(comentario.fecha)}</span>
+            `;
+            
+            div.appendChild(comentarioDiv);
+            
+            // Si tiene respuesta, agregarla debajo
+            if (conRespuesta) {
+                const respuestaDiv = document.createElement('div');
+                respuestaDiv.className = 'comment-item ai-response';
+                respuestaDiv.style.marginTop = '10px';
+                respuestaDiv.innerHTML = `
+                    <strong>Autor del Blog<span class="ai-badge">RESPUESTA</span></strong>
+                    <div class="comment-text">${conRespuesta.texto}</div>
+                    <span class="comment-date">${formatearFecha(conRespuesta.fecha)}</span>
+                `;
+                div.appendChild(respuestaDiv);
+            }
+            
+            return div;
+        }
+
+        function mostrarCargandoAutor(listaId, nombreUsuario) {
+            const lista = document.getElementById(listaId);
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'loading-ai';
+            loadingDiv.id = 'loading-autor-' + listaId;
+            loadingDiv.style.marginTop = '10px';
+            loadingDiv.style.marginLeft = '30px';
+            loadingDiv.innerHTML = `✍️ <strong>El autor del blog está respondiendo a ${nombreUsuario}</strong>`;
+            lista.appendChild(loadingDiv);
+        }
+
+        function ocultarCargandoAutor(listaId) {
+            const loading = document.getElementById('loading-autor-' + listaId);
+            if (loading) loading.remove();
+        }
+
+        async function simularRespuestaAutor(comentarioTexto, seccion) {
+            // Simular delay del autor escribiendo (5-7 segundos)
+            await new Promise(resolve => setTimeout(resolve, 5000 + Math.random() * 2000));
+            return generarRespuestaInteligente(comentarioTexto, seccion);
+        }
+
+        function mostrarComentarios(seccion, listaId) {
+            const lista = document.getElementById(listaId);
+            if (!lista) return;
+            lista.innerHTML = '';
+            
+            const comentarios = obtenerComentarios(seccion);
+            
+            // Agrupar comentarios con sus respuestas
+            const comentariosAgrupados = [];
+            const comentariosIA = comentarios.filter(c => c.esIA === true);
+            
+            comentarios
+                .filter(c => c.esIA !== true)
+                .forEach(comentario => {
+                    // Buscar si tiene respuesta
+                    const respuesta = comentariosIA.find(r => 
+                        Math.abs(new Date(r.fecha).getTime() - new Date(comentario.fecha).getTime()) < 10000 &&
+                        r.respondiendo_a === comentario.id
+                    );
+                    
+                    comentariosAgrupados.push({
+                        comentario: comentario,
+                        respuesta: respuesta
+                    });
+                });
+            
+            // Mostrar en orden inverso (más recientes primero)
+            comentariosAgrupados.reverse().forEach(grupo => {
+                lista.appendChild(crearElementoComentario(
+                    grupo.comentario, 
+                    false, 
+                    grupo.respuesta
+                ));
+            });
+        }
+
+        window.agregarComentario = async function(nombreId, comentarioId, listaId, seccion) {
+            const nombreInput = document.getElementById(nombreId);
+            const comentarioInput = document.getElementById(comentarioId);
+            
+            if (!nombreInput || !comentarioInput) return;
+            
+            const nombre = nombreInput.value.trim();
+            const comentario = comentarioInput.value.trim();
+            
+            if (!nombre) {
+                alert('Por favor, ingresa tu nombre');
+                return;
+            }
+            
+            if (!comentario) {
+                alert('Por favor, escribe un comentario');
+                return;
+            }
+
+            const boton = event.target;
+            boton.disabled = true;
+            boton.textContent = 'Publicando...';
+            
+            try {
+                // 1. Guardar comentario del usuario
+                const comentarioId = 'comment-' + Date.now();
+                const nuevoComentario = {
+                    id: comentarioId,
+                    nombre: nombre,
+                    texto: comentario,
+                    fecha: new Date().toISOString(),
+                    seccion: seccion,
+                    esIA: false
+                };
+                
+                const comentarios = obtenerComentarios(seccion);
+                comentarios.push(nuevoComentario);
+                guardarComentarios(seccion, comentarios);
+                
+                // 2. Limpiar campos
+                nombreInput.value = '';
+                comentarioInput.value = '';
+                
+                // 3. Actualizar vista inmediatamente
+                mostrarComentarios(seccion, listaId);
+                
+                // 4. Mostrar que el autor está respondiendo
+                mostrarCargandoAutor(listaId, nombre);
+                
+                // 5. Esperar respuesta del autor (5-7 segundos)
+                const respuestaAutor = await simularRespuestaAutor(comentario, seccion);
+                
+                // 6. Guardar respuesta del autor
+                const respuestaObj = {
+                    id: 'response-' + Date.now(),
+                    nombre: "Autor del Blog",
+                    texto: respuestaAutor,
+                    fecha: new Date().toISOString(),
+                    seccion: seccion,
+                    esIA: true,
+                    respondiendo_a: comentarioId
+                };
+                
+                comentarios.push(respuestaObj);
+                guardarComentarios(seccion, comentarios);
+                
+                // 7. Ocultar "escribiendo" y actualizar vista
+                ocultarCargandoAutor(listaId);
+                mostrarComentarios(seccion, listaId);
+                
+                // 8. Mostrar mensaje de éxito
+                const mensaje = document.createElement('div');
+                mensaje.style.cssText = 'position:fixed;top:20px;right:20px;background:#27ae60;color:white;padding:15px 25px;border-radius:10px;z-index:10000;box-shadow:0 4px 15px rgba(0,0,0,0.2);';
+                mensaje.textContent = '✓ Comentario publicado y respondido por el autor';
+                document.body.appendChild(mensaje);
+                setTimeout(() => mensaje.remove(), 3000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                ocultarCargandoAutor(listaId);
+                alert('Error al publicar comentario. Por favor intenta de nuevo.');
+            } finally {
+                boton.disabled = false;
+                boton.textContent = 'Comentar';
+            }
+        };
+
+        window.agregarOpinionForo = async function() {
+            const nombreInput = document.getElementById('foroNombre');
+            const opinionInput = document.getElementById('foroInput');
+            
+            if (!nombreInput || !opinionInput) return;
+            
+            const nombre = nombreInput.value.trim();
+            const opinion = opinionInput.value.trim();
+            
+            if (!nombre) {
+                alert('Por favor, ingresa tu nombre');
+                return;
+            }
+            
+            if (!opinion) {
+                alert('Por favor, escribe tu opinión');
+                return;
+            }
+
+            const boton = event.target;
+            boton.disabled = true;
+            boton.textContent = 'Publicando...';
+            
+            try {
+                const opinionId = 'opinion-' + Date.now();
+                const nuevaOpinion = {
+                    id: opinionId,
+                    nombre: nombre,
+                    texto: opinion,
+                    fecha: new Date().toISOString(),
+                    seccion: 'foro',
+                    esIA: false
+                };
+                
+                const opiniones = obtenerComentarios('foro');
+                opiniones.push(nuevaOpinion);
+                guardarComentarios('foro', opiniones);
+                
+                nombreInput.value = '';
+                opinionInput.value = '';
+                
+                mostrarComentarios('foro', 'foroComments');
+                mostrarCargandoAutor('foroComments', nombre);
+                
+                const respuestaAutor = await simularRespuestaAutor(opinion, 'foro');
+                
+                const respuestaObj = {
+                    id: 'response-' + Date.now(),
+                    nombre: "Autor del Blog",
+                    texto: respuestaAutor,
+                    fecha: new Date().toISOString(),
+                    seccion: 'foro',
+                    esIA: true,
+                    respondiendo_a: opinionId
+                };
+                
+                opiniones.push(respuestaObj);
+                guardarComentarios('foro', opiniones);
+                
+                ocultarCargandoAutor('foroComments');
+                mostrarComentarios('foro', 'foroComments');
+                
+                const mensaje = document.createElement('div');
+                mensaje.style.cssText = 'position:fixed;top:20px;right:20px;background:#27ae60;color:white;padding:15px 25px;border-radius:10px;z-index:10000';
+                mensaje.textContent = '✓ Opinión publicada y respondida por el autor';
+                document.body.appendChild(mensaje);
+                setTimeout(() => mensaje.remove(), 3000);
+                
+            } catch (error) {
+                alert('Error al publicar opinión.');
+            } finally {
+                boton.disabled = false;
+                boton.textContent = 'Publicar Opinión';
+            }
+        };
+
+        window.openPopup = function(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closePopup = function(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        window.subscribeBlog = function() {
+            const emailInput = document.getElementById('emailInput');
+            const message = document.getElementById('followMessage');
+            const email = emailInput.value.trim();
+            
+            if (email && email.includes('@')) {
+                const suscripciones = JSON.parse(localStorage.getItem('suscripciones') || '[]');
+                suscripciones.push({
+                    email: email,
+                    fecha: new Date().toISOString()
+                });
+                localStorage.setItem('suscripciones', JSON.stringify(suscripciones));
+                
+                message.style.display = 'block';
+                emailInput.value = '';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 3000);
+            } else {
+                alert('Por favor, ingresa un correo electrónico válido');
+            }
+        };
+
+        // Cargar comentarios al iniciar
+        window.addEventListener('load', function() {
+            mostrarComentarios('popup1', 'comments1');
+            mostrarComentarios('popup2', 'comments2');
+            mostrarComentarios('popup3', 'comments3');
+            mostrarComentarios('popup4', 'comments4');
+            mostrarComentarios('foro', 'foroComments');
+        });
+
+        // Cerrar popup al hacer clic fuera
+        document.querySelectorAll('.popup-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        console.log('%c✍️ Sistema de Respuestas del Autor Activo', 'color:#2196f3;font-size:16px;font-weight:bold');
+        console.log('%cEl autor responde automáticamente cada comentario en 5-7 segundos', 'color:#4caf50;font-size:12px');
+    </script>
+</body>
+</html>
